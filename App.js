@@ -1,21 +1,24 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar, SafeAreaView,View } from 'react-native';
+import Cesta from './src/telas/Cesta';
+import { useFonts, Montserrat_400Regular, Montserrat_700Bold } from '@expo-google-fonts/montserrat';
+import mock from './src/mocks/cesta';
+import AppLoading from 'expo-app-loading';
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+  const [fonteCarregada] = useFonts({
+    "MontSerratRegular":Montserrat_400Regular,
+    "MontSerratBold":Montserrat_700Bold,
+  });
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+  if(!fonteCarregada){
+    return <AppLoading/>
+  }
+
+  return (
+    <SafeAreaView style={{flex:1}}>
+      <StatusBar />
+      <Cesta {...mock} />
+    </SafeAreaView>
+  );
+};
